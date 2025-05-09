@@ -18,9 +18,13 @@ class Car {
   }
 
   update(roadBorders) {
-    if (this.damaged) {
+    // bug
+    // ------- logic bug --------
+    if (!this.damaged) {
+      // or if (this.damaged === false)
+      // ----- end of logic bug -----
       this.#move();
-      this.polygon = createPolygon();
+      this.polygon = this.#createPolygon();
       this.damaged = this.#assessDamage(roadBorders);
     }
     this.sensor.update(roadBorders);
@@ -35,7 +39,7 @@ class Car {
     return false;
   }
 
-  createPolygon() {
+  #createPolygon() {
     const points = [];
     const radius = Math.hypot(this.width, this.height) / 2;
     let theta = Math.atan2(this.width, this.height);
@@ -94,13 +98,16 @@ class Car {
   }
 
   draw(ctx) {
-    ctx.save();
-    ctx.translate(this.x, this.y);
-    ctx.rotate(-this.angle);
+    if (this.damaged) {
+      ctx.fillStyle = "gray";
+    } else ctx.fillStyle = "black";
     ctx.beginPath();
-    ctx.rect(-this.width / 2, -this.height / 2, this.width, this.height);
+    ctx.moveTo(this.polygon[0].x, this.polygon[0].y);
+    for (let i = 0; i < this.polygon.length; i++) {
+      ctx.lineTo(this.polygon[i].x, this.polygon[i].y);
+    }
     ctx.fill();
-    ctx.restore();
+
     this.sensor.draw(ctx);
   }
 }
