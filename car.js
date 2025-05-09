@@ -18,11 +18,7 @@ class Car {
   }
 
   update(roadBorders) {
-    // bug
-    // ------- logic bug --------
     if (!this.damaged) {
-      // or if (this.damaged === false)
-      // ----- end of logic bug -----
       this.#move();
       this.polygon = this.#createPolygon();
       this.damaged = this.#assessDamage(roadBorders);
