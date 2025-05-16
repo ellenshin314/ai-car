@@ -21,3 +21,8 @@ const animate = () => {
 };
 
 animate();
+
+
+function foo() {
+  console.log("hello world")
+}
