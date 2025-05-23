@@ -14,6 +14,7 @@ class Car {
 
     if (controlType !== "dumdum") {
       this.sensor = new Sensor(this);
+      this.brain = new NeuralNetwork();
     }
     
     this.controls = new Controls(controlType);
