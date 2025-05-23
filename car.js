@@ -15,7 +15,8 @@ class Car {
     if (controlType !== "dumdum") {
       this.sensor = new Sensor(this);
     }
-    this.controls = new Controls();
+    
+    this.controls = new Controls(controlType);
   }
 
   update(roadBorders, traffic) {
@@ -24,7 +25,7 @@ class Car {
       this.polygon = this.#createPolygon();
       this.damaged = this.#assessDamage(roadBorders, traffic);
     }
-    this.sensor.update(roadBorders, traffic);
+    if (this.sensor) this.sensor.update(roadBorders, traffic);
   }
 
   #assessDamage(roadBorders, traffic) {
