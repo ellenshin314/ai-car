@@ -1,11 +1,15 @@
 const canvas = document.getElementById("myCanvas");
-canvas.width = 200;
+canvas.width = 500;
 
 const ctx = canvas.getContext("2d");
 
-const road = new Road(canvas.width / 2, canvas.width * 0.9);
+const road = new Road(canvas.width / 2, canvas.width * 0.9, 5);
 const car = new Car(road.getLaneCenter(1), 100, 30, 50, "keys");
-const traffic = [new Car(road.getLaneCenter(1), -100, 30, 50, "dumdum", 2)];
+const traffic = [
+  new Car(road.getLaneCenter(1), -100, 30, 50, "dumdum", 2),
+  new Car(road.getLaneCenter(2), -100, 30, 50, "dumdum", 3),
+  new Car(road.getLaneCenter(0), -100, 30, 50, "dumdum", 5),
+];
 
 const animate = () => {
   for (let i = 0; i < traffic.length; i++) {
