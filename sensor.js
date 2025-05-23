@@ -10,21 +10,16 @@ class Sensor {
   }
 
   update(roadBorders) {
-    // invoke a member method ie this.something() called #castRay();
     this.#castRay();
-    // whenever the update method is invoked reassign the readings prop back to an empty array
     this.reading = [];
-    //iterate through the prop rays
     for (let i = 0; i < this.rays.length; i++) {
       this.reading.push(this.#getReading(this.rays[i], roadBorders));
     }
   }
 
-  // getReading METHOD is defined with parameters ray and roadBorders.
   #getReading(ray, roadBorders) {
     let touches = [];
 
-    // iterating through roadborders. variable touch is defined by getIntersec
     for (let i = 0; i < roadBorders.length; i++) {
       const touch = getIntersection(
         ray[0],
@@ -37,7 +32,6 @@ class Sensor {
       }
     }
 
-    //if touches.length is 0, we return null. else return touches after some alterations, do some research about Array.map(), "..."
     if (touches.length == 0) {
       return null;
     } else {
